@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.bwelco.piserver.socket.DoorController;
 import com.bwelco.piserver.socket.SocketService;
+import com.bwelco.piserver.util.SpUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         socketService = SocketService.service(PORT);
 
         DoorController.getInstance().reset();
+
+        SpUtils.clearUser();
     }
 
 

@@ -29,4 +29,5 @@ dependencies {
     provided 'com.google.android.things:androidthings:0.4-devpreview'
     compile 'com.google.code.gson:gson:2.7'
     compile 'org.nanohttpd:nanohttpd:2.2.0'
+    compile 'org.greenrobot:greendao:2.2.0'
 }

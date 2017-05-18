@@ -1,6 +1,7 @@
 package com.bwelco.piserver;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.bwelco.piserver.server.HttpdServer;
 
@@ -11,8 +12,9 @@ import java.io.IOException;
  */
 
 public class PiAPP extends Application {
-
+    public static Context applicationContext;
     HttpdServer httpServerService;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -21,5 +23,7 @@ public class PiAPP extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        applicationContext = getApplicationContext();
     }
+
 }
