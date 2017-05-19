@@ -1,6 +1,6 @@
 package com.bwelco.piserver.action;
 
-import com.bwelco.piserver.util.SpUtils;
+import com.bwelco.piserver.util.UserSpUtil;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ public class RegisterAction extends BaseAction {
         String username = queryMap.get("user");
         String passwd = queryMap.get("pass");
         String applyReason = queryMap.get("apply_info");
-        SpUtils.addUser(username, passwd, applyReason);
+        UserSpUtil.addUser(username, passwd, applyReason);
         return getDefaultResponse(true, "成功发送申请");
     }
 

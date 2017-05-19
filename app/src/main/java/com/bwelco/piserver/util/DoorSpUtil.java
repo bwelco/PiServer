@@ -17,7 +17,6 @@ import java.util.List;
 
 public class DoorSpUtil {
 
-
     public static final String DOOR_TABLE_NAME = "door_table_name";
     public static final String DOOR_TABLE_KEY = "door_table_key";
     static SharedPreferences sharedPreferences;
@@ -28,6 +27,9 @@ public class DoorSpUtil {
 
         @SerializedName("time")
         public long time;
+
+        @SerializedName("openType")
+        public String openType;
     }
 
     static {
@@ -59,7 +61,7 @@ public class DoorSpUtil {
         saveDoorEvent(doorEvents);
     }
 
-    public void clearEvent() {
+    public static void clearEvent() {
         sharedPreferences.edit().putString
                 (DOOR_TABLE_KEY, "").commit();
     }

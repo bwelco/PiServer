@@ -1,7 +1,8 @@
 package com.bwelco.piserver.action;
 
 import com.bwelco.piserver.UserBean;
-import com.bwelco.piserver.util.SpUtils;
+import com.bwelco.piserver.util.ExceptionSPUtil;
+import com.bwelco.piserver.util.UserSpUtil;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
@@ -42,8 +43,9 @@ public class LoginAction extends BaseAction {
         Map<String, String> queryMap = session.getParms();
         String user = queryMap.get("user");
         String passwd = queryMap.get("pass");
+        long time = Long.valueOf(queryMap.get("time"));
 
-        List<UserBean> userList = SpUtils.getUserList();
+        List<UserBean> userList = UserSpUtil.getUserList();
 
         LoginResponse loginResponse = new LoginResponse();
 
@@ -69,6 +71,11 @@ public class LoginAction extends BaseAction {
                 } else {
                     loginResponse.isSuccess = false;
                     loginResponse.reason = "密码错误";
+                    ExceptionSPUtil.ExceptionBean exceptionBean = new ExceptionSPUtil.ExceptionBean();
+                    exceptionBean.time = time;
+                    exceptionBean.userName = user;
+                    exceptionBean.errType = "登录密码错误";
+                    ExceptionSPUtil.addExceptionEvent(exceptionBean);
 
                     return NanoHTTPD.newFixedLengthResponse(new Gson().toJson(loginResponse));
                 }

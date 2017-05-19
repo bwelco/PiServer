@@ -1,6 +1,7 @@
 package com.bwelco.piserver.server;
 
 import com.bwelco.piserver.action.DoorAction;
+import com.bwelco.piserver.action.ExceptionAction;
 import com.bwelco.piserver.action.LoginAction;
 import com.bwelco.piserver.action.RegisterAction;
 import com.bwelco.piserver.action.UserManagerAction;
@@ -28,6 +29,13 @@ public class HttpDispatcher {
     interface DoorControllerUri {
         String openDoor = "/openDoor";
         String closeDoor = "/closeDoor";
+        String getEventList = "/getDoorEventList";
+    }
+
+    interface ExceptionUri {
+        String loginPatternErr = "/exception/loginFail";
+        String superPatternErr = "/exception/trySpuerAdminFail";
+        String getExceptionList = "/exception/getExceptionList";
     }
 
 
@@ -50,6 +58,14 @@ public class HttpDispatcher {
             return new DoorAction().openDoor(session);
         } else if (uri.equals(DoorControllerUri.closeDoor)) {
             return new DoorAction().closeDoor(session);
+        } else if (uri.equals(DoorControllerUri.getEventList)) {
+            return new DoorAction().getDoorEventList(session);
+        } else if (uri.equals(ExceptionUri.loginPatternErr)) {
+            return new ExceptionAction().userPatternNotCorrect(session);
+        } else if (uri.equals(ExceptionUri.superPatternErr)) {
+            return new ExceptionAction().trySuperPattern(session);
+        } else if (uri.equals(ExceptionUri.getExceptionList)) {
+            return new ExceptionAction().getExceptionList(session);
         }
 
         return NanoHTTPD.newFixedLengthResponse("error");

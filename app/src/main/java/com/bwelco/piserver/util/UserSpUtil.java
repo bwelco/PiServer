@@ -15,7 +15,7 @@ import java.util.List;
  * Created by bwelco on 2017/5/18.
  */
 
-public class SpUtils {
+public class UserSpUtil {
 
     public final static String LOGINTABLE = "login_user_table";
     public final static String LOGINTABLE_KEY = "login_table_key";
